@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Weather Day</title>
+
+	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style type="text/css">
+	
+
+footer ul {
+  list-style: none;
+  display: block;
+  float: left;
+  margin-left :142px;
+
+  
+}
+footer h3 {
+  font-weight: 100;
+  margin-bottom: 0;
+
+}
+
+/*__________ weather*/
+#tempunit{
+  font-weight: bold;
+  color: white;
+}
+#tempunit:hover{
+  color: grey;
+}
+
+
+
+.textcontainer{
+  padding:20px;
+}
+
+#weathercond{
+  display: inline;
+}
+
+.cust-hide{
+  opacity:0;
+}
+
+
+
+.wrapper{
+  color: white;
+  margin: auto;
+  margin-top: 20px;
+  max-width: 900px;
+    height : 460px;
+  background-color: grey;
+  background-position: top center; 
+  border: solid 1px white;
+  border-radius: 10px;
+  background-clip: content-box;
+  box-shadow: black 2px 2px 8px;
+  text-shadow: black 1px 1px 2px;
+}
+
+#loading{
+  margin-top:80px;
+  margin-left: auto;
+  margin-right: auto;
+  width:100%;
+  text-align:center;
+  position: absolute;
+}
+
+.loading {
+	-webkit-animation:spin 2s linear infinite;
+	-moz-animation:spin 2s linear infinite;
+	animation:spin 2s linear infinite;
+}
+@-moz-keyframes spin { 100% { 
+	-moz-transform:rotate(360deg); 
+	}
+}
+@-webkit-keyframes spin { 100% { 
+	-webkit-transform:rotate(360deg); 
+	}
+}
+@keyframes spin { 100% {
+	-webkit-transform:rotate(360deg);
+	transform:rotate(360deg);
+	}
+}
+
+
+</style>
+
+
+
+
+</head>
+<body style="padding: 0; background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);">
+
+
+<!-- _________________________________________________________________HEADER ____________________________________________________-->
+
+<div class="header" style=" height: 50px;width: 95%; margin-left: 29px; margin-bottom: 10px;">
+<nav class="navbar navbar-inverse" style="background-color: #6CA9FF;">
+  <div class="container-fluid" style="text-align:center">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#"> <img src="../Ressources/logo.png " style="height: 50px; margin-top: -12px;"></a>
+       <a class="navbar-brand" href="#" style="color: white;"> <span style="color: gold;">W</span>eather<span style="color: gold;">D</span>ay  </a>    
+    </div>
+    <ul class="nav navbar-nav navbar-center" >
+    
+      <li STYLE="padding:0 0 0 400px;"><a style="color : white; font-size:25px;" ><script type="text/javascript">     d = new Date();   
+ document.write(d.toLocaleDateString()); 
+</script>
+ </a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="login.html" style="color : white;"><span class="glyphicon glyphicon-log-in"></span> <span style="color: gold;">D</span>éconnexion</a></li>
+    </ul>
+  </div>
+</nav>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- _________________________________________________________________MAIN  ____________________________________________________-->
+
+<div class="main" style="background-image: linear-gradient(-225deg, #5D9FFF 0%, #B8DCFF 48%, #6BBBFF 100%); height: 500px;width: 95%; margin-left: 29px; margin-bottom: 10px;">
+	
+
+  
+  
+<div class="col-xs-12">
+    <div id="loading">
+      <img src="http://www.jasonkenison.com/uploads/blog/loading.png" class="loading">
+    </div>
+    <div class="wrapper cust-hide text-center h2">
+      <div class="textcontainer">
+   <br><br><br><br>
+        <div id="localisation"></div>
+        <div id="temperature">
+          <span id="tempvalue"></span>°
+          <span id="tempunit"></span>
+          <div><img id="weathercond" src="" alt="" /></div>
+          <span id="weathercondtext"></span>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+    
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+<!-- _________________________________________________________________FOOTER ____________________________________________________-->
+
+<div class="footer" style="background-color: #6CA9FF; height: 150px;width: 95%; margin-left: 29px; margin-bottom: 10px;  color: white;">	
+<footer>
+	<h1 style="text-align: center; color: gold;">About Us</h1>
+  <ul>
+    <h3 style="color: gold;">Service Support </h3>
+    <li>05 22 22 20 20</li>
+ 
+  </ul>
+  <ul>
+    <h3 style="color: gold;">Other Services</h3>
+    <li><a href="#" style="color: white;"> Journal Sport </a> </li>
+     
+  </ul>
+  <ul>
+    <h3 style="color: gold;">Developpers </h3>
+    <li> <a href="https://www.facebook.com/010wassim" style="color: white;"> FATHALLAH WASSIM </a></li>
+    <li> <a href="https://www.facebook.com/abderrahmane.oubbaih " style="color: white;">   OUBBAIH ABDERRAHMANE  </a></li>
+   
+  </ul>
+ 
+</footer>
+</div>
+
+
+
+<!-- è_______ Script __________________-->
+
+<script type="text/javascript">
+	var openWeatherMapApiId = "f29ff68742b77716036c66d49a919c51";
+var CELSIUS_UNIT = true;
+var FARENHEIT_UNIT = false;
+var tempUnit = CELSIUS_UNIT;
+var tempValue = 30;
+var tempValElement = null;
+var tempUnitElement = null;
+var weatherCondImage = null;
+var weatherCondText = null;
+var loadingBloc = null;
+var mainBloc = null;
+var localField = null;
+var RANDOM_MODE = 0;
+var HOME_MODE = 1;
+var mode = HOME_MODE;
+var POSITION_MODE_HTML5 = 0;
+var POSITION_MODE_IP = 1;
+var positionMode = POSITION_MODE_HTML5;
+// if we're not in https we use geoplugin service to get position from IP
+if (window.location.protocol === "http:"){
+  positionMode = POSITION_MODE_IP;
+}   
+
+// backgrounds matching weather condition
+var backgrounds = {
+  '01d': 'http://www.gannett-cdn.com/-mm-/1f09360cfabb773cdf6fa082f2fafe397a2d03b1/c=28-0-479-338&r=x404&c=534x401/local/-/media/FortMyers/2014/12/08/B9315415807Z.1_20141208164230_000_GI99BRCAH.1-0.jpg',
+  '02d': 'http://media02.hongkiat.com/beautiful-clouds/Heart-From-Cloud.jpg',
+  '03d': 'http://media02.hongkiat.com/beautiful-clouds/Heart-From-Cloud.jpg',
+  '04d': 'https://images.pexels.com/photos/311039/pexels-photo-311039.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=700',
+  '09d': 'http://www.indiapages.in/wp-content/uploads/2016/05/Heavy-rainfall-765x437.jpg',
+  '10d': 'http://i1.tribune.com.pk/wp-content/uploads/2014/04/698341-deadlyrain-1398055116-647-640x480.jpg',
+  '11d': 'http://www.hvac.com/wp-content/uploads/2015/06/thunderstorm.jpg',
+  '13d': 'https://pixabay.com/static/uploads/photo/2015/12/08/00/32/snow-1081817_960_720.jpg',
+  '50d': 'https://s0.geograph.org.uk/photos/27/82/278234_f5d93eec.jpg',
+  '01n': 'http://i.huffpost.com/gen/4437210/thumbs/o-FULL-MOON-570.jpg?16',
+  '02n': 'https://api.ning.com/files/NZxM6Ejt7tm0Yk*0pf0zUANknGZrfZgAHpi7*WQkxxcXl8sWmuDcKLKdV8VZhR*K9cvdwmzdNs5QIIVfsnbiZYO9cu6lxYE0/26MoonCloudsStudy.jpg?width=737&height=552',
+  '03n': 'https://api.ning.com/files/NZxM6Ejt7tm0Yk*0pf0zUANknGZrfZgAHpi7*WQkxxcXl8sWmuDcKLKdV8VZhR*K9cvdwmzdNs5QIIVfsnbiZYO9cu6lxYE0/26MoonCloudsStudy.jpg?width=737&height=552',
+  '04n': 'https://images.pexels.com/photos/311039/pexels-photo-311039.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=440',
+  '09n': 'http://orig13.deviantart.net/c640/f/2014/026/a/b/blue_night_rain_by_art_of-d73vn4p.jpg',
+  '10n': 'http://orig13.deviantart.net/c640/f/2014/026/a/b/blue_night_rain_by_art_of-d73vn4p.jpg',
+  '11n': 'http://www.hvac.com/wp-content/uploads/2015/06/thunderstorm.jpg',
+  '13n': 'http://wvs.topleftpixel.com/photos/2011/03/allen-gardens_snow_dog-walker_bw_01.jpg',
+  '50n': 'https://s0.geograph.org.uk/photos/27/82/278234_f5d93eec.jpg',
+};
+
+// proxy used to enable calling unsecure (http) website within secure (https) website
+function CorsHelper(needed){
+  var currentCORS = 0;
+  var nbTries = 0;
+  var corsURLs = [ 
+    "https://cors-anywhere.herokuapp.com/",              
+    "https://crossorigin.me/",
+  ];
+  this.getCorsURL = function(){
+    return needed?corsURLs[currentCORS]:"";
+  };
+  this.tryOther = function(){
+    if (nbTries < 3){
+      currentCORS++;
+      if (currentCORS >= corsURLs.length){
+        currentCORS = 0;
+      }
+      nbTries++;
+      return true;
+    }
+    return false;
+  }
+}
+var corsHelper = new CorsHelper(positionMode != POSITION_MODE_IP);
+
+
+
+// we wait for the dom to be ready
+$(document).ready(function(){
+  // getting needed dom elements
+  localField = $('#localisation');
+  tempValElement = $('#tempvalue');
+  tempUnitElement = $('#tempunit');  
+  weatherCondImage = $('#weathercond');
+  weatherCondText = $('#weathercondtext');
+  loadingBloc = $('#loading');
+  mainBloc = $('.wrapper');
+
+  // Unit is switched between Celsius and Farenheit when unit label is clicked
+  tempUnitElement.click(function(){
+      tempUnit = !tempUnit;
+      updateTemp();
+  });
+  
+  // the refresh buttons will reload position and weather info
+  $('.refreshbutton').click(function(ev){
+    mode = (ev.currentTarget.id === "homebutton")?HOME_MODE:RANDOM_MODE;
+    loadingBloc.removeClass('hidden').toggleClass('cust-hide', false, 400);
+    mainBloc.toggleClass('cust-hide', true, 400);
+    fetchPosition();
+  });
+  
+  updateTemp();
+  
+  fetchPosition();
+});
+
+var geolocOptions = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0
+};
+
+function success(lat, lng) {
+  if(mode == RANDOM_MODE){
+    ({lat, lng} = generateRandomPoints({'lat':lat, 'lng':lng}, 20000000, 100)[0]);
+  }
+  fetchWeatherAtPosition(lat, lng);
+}
+
+function error(err) {
+  console.warn('ERROR(' + err.code + '): ' + err.message);
+  displayError();
+}
+
+function displayError(){
+  // display error message
+  localField.text("Vérifiez votre connextion internet S'il vous plait !");
+  tempValElement.text("-");
+  // hide loading element
+  // and show main bloc
+  loadingBloc.toggleClass('cust-hide', true, 1000, function(){
+    loadingBloc.addClass('hidden');
+  });
+  mainBloc.toggleClass('cust-hide', false, 1000);
+}
+
+function fetchPosition(){
+  if( positionMode === POSITION_MODE_HTML5 && navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(function(pos){
+      var crd = pos.coords;
+      var lat = crd.latitude;
+      var lng = crd.longitude;
+      success(lat, lng);
+    }, error, geolocOptions);  
+  }
+  else{
+    $.getJSON("http://www.geoplugin.net/json.gp?jsoncallback=?",
+        function (data) {
+            success(parseFloat(data.geoplugin_latitude), parseFloat(data.geoplugin_longitude));
+        }
+    ).fail(function(){
+      displayError();
+    });
+  }
+}
+
+function fetchWeatherAtPosition(lat, lng){
+  // use openweathermap
+  var url = corsHelper.getCorsURL() + "http://api.openweathermap.org/data/2.5/weather?units=metric&lat=" + lat + "&lon=" + lng + "&appid=" + openWeatherMapApiId;
+  $.getJSON(url, function(data) {
+    // If no city was found at those coordinates then retry fetching new coordinates
+    if(data.cod === "404"){
+      fetchPosition();
+      return;
+    }
+    console.log(data.cod === "404");
+    //temperature
+    tempUnit = data.sys.country === "US"?FARENHEIT_UNIT:CELSIUS_UNIT; // when city in US, Farenheit is used
+    tempValue = Math.round(data.main.temp);
+    
+    // location name
+    localField.text(data.name + ', ' + data.sys.country);
+    
+    // weather conditions
+    weatherCondImage.attr('src',"http://openweathermap.org/img/w/" + data.weather[0].icon +".png");
+    weatherCondText.text(data.weather[0].description);
+    $(".wrapper").css('background-image','url('+ backgrounds[data.weather[0].icon]+')');
+    updateTemp();
+    
+    // hide loading element
+    // and show main bloc
+    loadingBloc.toggleClass('cust-hide', true, 1000, function(){
+      loadingBloc.addClass('hidden');
+    });
+    mainBloc.toggleClass('cust-hide', false, 1000);
+  }).fail(function( jqXHR, textStatus, errorThrown ) {
+    if(corsHelper.tryOther()){
+      fetchWeatherAtPosition(lat, lng);
+    }
+    else{
+      fetchPosition();
+      displayError();
+    }
+  });
+}
+
+// update displayed temperature with selected Unit
+function updateTemp(){
+  tempUnitElement.text(tempUnit === CELSIUS_UNIT?'C':'F');
+  tempValElement.text(tempUnit?tempValue:Math.round(toFarenheit(tempValue)));
+}
+
+function toFarenheit(celsiusTemp){
+  return celsiusTemp * 1.8 + 32;
+}
+
+function toCelsius(farTemp){
+  return (farTemp - 32)/1.8;
+}
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,126 @@
+
+
+
+
+
+<!-- By Wassim Fathallah -->
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>login</title>
+    <link rel="stylesheet" href="../css/style.css"/>
+</head>
+<body class="form-v8">
+	<div class="page-content">
+		<div class="form-v8-content">
+			<div class="form-left">
+				<img src="../Ressources/pict.jpg" height="430px" width=440px" alt="form">
+			</div>
+			<div class="form-right">
+				<div class="tab">
+					<div class="tab-inner">
+						<button class="tablinks" style="color:gold;   text-decoration-color:white; padding-top: -10px;">Sign In</button>
+					</div>
+			
+				</div>
+				<!-- Inscription -->
+				<form class="form-detail" onsubmit="return test();"  action="weather_day.html" method="post" name="Flogin">
+					<div class="tabcontent" id="login">
+						
+
+
+
+						<div class="form-row">
+							<label class="form-row-inner">
+								<input type="email" name="email" id="email" class="input-text" required>
+								<span class="label">E-Mail</span>
+		  						<span class="border"></span>
+							</label>
+						</div>
+
+						
+						<div class="form-row">
+							<label class="form-row-inner">
+								<input type="password" name="password" id="password" class="input-text" required>
+								<span class="label">Mot de pass</span>
+								<span class="border"></span>
+							</label>
+						</div>
+						
+						<div class="form-row-last">
+							<input type="submit" name="register" class="register" value="Sign In"  >
+						</div>
+                        
+                        
+					</div>
+				</form>
+				
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+// cette function permet de saisir l'email et le mot de pass et verifier le majiscul sur l'email		
+function test()
+{
+	
+
+var correct = false;
+var mail = document.forms["Flogin"]["email"].value;
+var pwd = document.forms["Flogin"]["password"].value;
+
+if(mail.toLowerCase()=="salut@salut.com" && pwd=="meteo1818")
+{	
+
+correct = true;
+}
+
+
+else if(mail.toLowerCase()=="salam@salam.fr" && pwd=="salam2019")
+{
+
+correct = true;
+}
+else if(mail.toLowerCase()=="admin@admin.ma" && pwd=="admin2020")
+{	
+
+	correct = true;
+}
+
+
+
+if(correct == false)
+{
+
+	alert("Votre identifiant ou mot de pass est incorrect ");
+	return false;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+	</script>
+</body>>
+</html>
